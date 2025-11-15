@@ -1,21 +1,23 @@
-import type {Recipe} from "./../../types.ts"
-import RecipeComments from "./RecipeComments.tsx"
+import type {Recipe,Ingredient,Comment} from "../../types.ts"
+//import RecipeComments from "./RecipeComments.tsx"
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { CardBody, CardText, CardTitle } from "react-bootstrap";
-        
-export default function RecipeCard({recipe, onSelect, isSelected, setRecipeCardSelectedId}:
+import { CardBody, CardFooter, CardText, CardTitle } from "react-bootstrap";
+import { sharedSelectedRecipe, getSharedSelectedRecipe, setSharedSelectedRecipe} from './shared-state.ts';        
+export default function RecipeCard({recipe, onSelect, isSelected=false, setRecipeCardSelectedId}:
     {
         recipe: Recipe, 
-        onSelect: (id:number)=> void
+        onSelect: (recipe:Recipe)=> void;
         isSelected:boolean,
         setRecipeCardSelectedId: (id:number)=> void
        
    } ){ 
     
         const handleClick= ()=> {
-                onSelect(recipe.id)
+           onSelect(recipe)
+          
                 setRecipeCardSelectedId(recipe.id)
+             setSharedSelectedRecipe(recipe) ;  
               
      }; 
         
@@ -37,21 +39,27 @@ export default function RecipeCard({recipe, onSelect, isSelected, setRecipeCardS
                             <ul className="card-text">
                                  
                                 <li key={recipe.id}> {recipe.type}  </li>
+                           
                                   { 
                                     recipe.ingredients && Array.isArray(recipe.ingredients) && (
                                    <ul> 
-                                        {recipe.ingredients.map((ingredient: string, index: number) =>(
-                                        <li key={index}>{ingredient}</li>
+                                        {recipe.ingredients.map((ingredient, index: number) =>(
+                                        <li key={index}>{ingredient.ingredient}</li>
                                         ))
                                        }
                                   </ul>
-                                )}
-                                                                        
-                            </ul>
+                                )
+                                }
+                                </ul>                                        
+                            
                           </div>
 
 
                 </CardBody >
+                <CardFooter>
+                    <small className="text-muted">By: {recipe.authorName}</small>
+
+                </CardFooter>
             </Card>
            );
 }

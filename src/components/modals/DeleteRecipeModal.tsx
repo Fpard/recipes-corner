@@ -4,13 +4,16 @@ import { Modal, Button } from "react-bootstrap";
 import { type FC } from "react";
 // Import types
 import type { Recipe } from "../../types";
+//import { sharedSelectedRecipe, getSharedSelectedRecipe, setSharedSelectedRecipe} from '../pages/shared-state';
+// Import React Router components for navigation
+import { useNavigate, useParams } from "react-router-dom";
 
 // Define the props interface for this component
 interface DeleteRecipeModalProps {
   show: boolean;
   onHide: () => void;
   onConfirm: () => void;
-  recipe: Recipe | null;
+  recipe: Recipe;
 }
 
 // Define the DeleteModal component
@@ -20,10 +23,41 @@ const DeleteRecipeModal: FC<DeleteRecipeModalProps> = ({
   onConfirm,
   recipe,
 }) => {
+
+ // recipe = getSharedSelectedRecipe();
+  const navigate = useNavigate(); 
   // Handler function to handle confirmation
-  const handleConfirm = () => {
+    const handleConfirm = () => {
+    handleDelete();
     onConfirm();
     onHide();
+  };
+
+  // Function to handle recipe deletion
+  const handleDelete = async () => {
+    if (!recipe) return;
+       //console.log(" in handledelete function modal recipe id: " + recipe.id)
+    try {
+      // Make API call to delete the recipe
+      const response = await fetch(
+        `https://6916b6aba7a34288a27e1e1b.mockapi.io/recipes/recipes/${recipe?.id}`,
+        //`http://localhost:3000/recipes/${recipe.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete recipe");
+      }
+
+      // Redirect to recipes page after successful deletion
+      navigate("../../recipes");
+    } catch (err) {
+      console.error("Error deleting recipe:", err);
+    } finally {
+      
+    }
   };
 
   return (
@@ -36,9 +70,13 @@ const DeleteRecipeModal: FC<DeleteRecipeModalProps> = ({
           <p>
             Are you sure you want to delete the{" "}
             <strong>
-              {recipe.type} {recipe.name} {recipe.id}
+              {recipe.type} 
             </strong>
-            ? This action cannot be undone.
+              {" "} recipe named: {" "}
+            <strong>
+                { recipe.name} 
+            </strong>
+             ? This action cannot be undone.
           </p>
         ) : (
           <p>

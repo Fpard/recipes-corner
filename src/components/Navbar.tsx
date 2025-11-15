@@ -1,43 +1,31 @@
-//import React from "react";
-//import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-//import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import {Navbar as AppNavbar} from 'react-bootstrap';
-//import NavDropdown from 'react-bootstrap/NavDropdown';
-// Import React Router components for navigation
 import { Link, useLocation } from "react-router-dom";
 import ToolbarBtn from "./ToolbarBtn.tsx";
 import { useState } from 'react';
-import {recipes} from "../data/recipes.ts";
-import SelectRecipeType from "./sidebar/RecipeSidebar.tsx";
-// Define the props interface for TypeScript
-// This tells TypeScript what props this component expects
-interface NavbarProps {
-  onNewRecipe: () => void; // Function that will be called when "New Recipe" is clicked
-}
-export default function Navbar({onNewRecipe}:NavbarProps){
-   // useLocation hook gets the current URL path
-  // We use this to highlight the active navigation link
+import SelectRecipeType from "./SelectRecipeType.tsx";
+
+export default function Navbar(){
+// useLocation hook gets the current URL path
+  //To highlight the active navigation link
   const location = useLocation();
-  const [recipesState, setRecipesState] = useState(recipes)
-   const [recipeTypeSelection, setRecipeTypeSelection] = useState("all")
-   const [recipeCardSelectedId, setRecipeCardSelectedId] = useState(-1)
-   const [comments, setComments] = useState(["no", "comments"] )
-   
-    return(
+  // Use this variable to store the selected value of the chosen recipe type to display.
+  const [recipeTypeSelection, setRecipeTypeSelection] = useState("Pick a type")
+     
+  return(
         // AppNavbar provides the navigation bar styling and behavior
-    <AppNavbar bg="dark" variant="dark" expand="lg" className="mb-3">
-      <Container>
+    <AppNavbar bg="dark" variant="dark" expand="sm" className="mb-0">
+      <Container >
         {/* Brand/logo that links to home page */}
         <AppNavbar.Brand as={Link} to="/">
-          🍳 Recipe Corner
+           Recipes' Corner
         </AppNavbar.Brand>
         
-        {/* Hamburger menu button for mobile devices */}
+        {/* Hamburger menu button for when browser window shrinks  */}
         <AppNavbar.Toggle aria-controls="basic-navbar-nav" />
 
-         {/* Navigation links that collapse on mobile */}
+         {/* Navigation links that collapse when browser window shrinks */}
         <AppNavbar.Collapse id="basic-navbar-nav">
           {/* Left side navigation links */}
           <Nav className="me-auto">
@@ -54,16 +42,15 @@ export default function Navbar({onNewRecipe}:NavbarProps){
             >
               All Recipes
             </Nav.Link>
-
-            <SelectRecipeType recipeTypeSelection= {recipeTypeSelection}
-                              setRecipeTypeSelection={setRecipeTypeSelection}
-                              />
-
-        </Nav>
-          {/* Right side - Add, edit, delete Recipe buttons */}
-          
-          <ToolbarBtn recipesState={recipesState} recipeCardSelectedId = {recipeCardSelectedId}
-           setRecipesState={setRecipesState} />
+            {/* A dropdown menu that allows the user to look at recipes by types.
+             It is reset by clicking on the reset button next to it*/}  
+            <SelectRecipeType
+              recipeTypeSelection= {recipeTypeSelection}
+              setRecipeTypeSelection={setRecipeTypeSelection}
+            />
+            {/* Right side - Add, edit, delete and comment Recipe buttons */}
+              <ToolbarBtn />
+          </Nav>
         </AppNavbar.Collapse>
       </Container>
     </AppNavbar>
