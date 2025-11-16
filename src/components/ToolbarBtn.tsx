@@ -5,7 +5,7 @@ import NewRecipeModal from "./modals/NewRecipeModal.tsx";
 import EditRecipeModal from "./modals/EditRecipeModal.tsx";
 import AddCommentModal from "./modals/AddCommentModal.tsx";
 import DeleteRecipeModal from "./../components/modals/DeleteRecipeModal.tsx";
-import {getSharedSelectedRecipe, setSharedSelectedRecipe} from './pages/shared-state.ts'
+import {getSharedSelectedRecipe} from './pages/shared-state.ts'
 
 export default function ToolbarBtn()
 {  
