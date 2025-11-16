@@ -50,9 +50,10 @@ export default function SelectRecipeType({recipeTypeSelection,setRecipeTypeSelec
           const types = data.map(item => item.type);
           const unique = Array.from(new Set(types));
           setUniqueTypes(unique);
+          console.log("Loading in progress: " + loading);
                 
-        } catch (error) {
-          setError((error as Error).message);
+        } catch (err) {
+          setError((err as Error).message);
           console.error('Error fetching data:', error);
         }
         finally {
