@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 // Import our custom components
 import RecipeCard from "./RecipeCard";
 import type {Recipe} from "../../types.ts"
-import Footer from "../Footer.tsx"
 
 // HomePage component - the main landing page
 export default function HomePage() {
@@ -62,11 +61,12 @@ export default function HomePage() {
   const handleCardClick= (recipe: Recipe)=> {
            
            setRecipeCardSelectedId(recipe.id);
+           console.log("Selected recipe id: " + recipeCardSelectedId);
   }
   return (
      <>
       {/* Section with welcome message */}
-      <Container style={{ height: '900px' }}>
+      <Container style={{ height: '655px' }}>
       <Row className="mt-0" >
         <Col>
           <Card className="text-center bg-success text-white" style={{ width: '68rem' }}>
@@ -144,19 +144,13 @@ export default function HomePage() {
                 </Card.Body>
               </Card>
             </Col>
-                        
+                  
           </Row>
           
         </Col>
               
       </Row>
-       <Row style={{ height: '190px' }}>
-                          <Card style={{ width: '70rem'}}>
-                           <Card.Body style={{ height: '140px' , overflowY: 'auto'  }}>
-                              <Footer /> 
-                           </Card.Body>  
-                          </Card> 
-                       </Row> 
+       
        </Container>
     </>
   );

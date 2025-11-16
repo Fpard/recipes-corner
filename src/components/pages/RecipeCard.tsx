@@ -1,9 +1,9 @@
-import type {Recipe,Ingredient,Comment} from "../../types.ts"
+import type {Recipe} from "../../types.ts"
 //import RecipeComments from "./RecipeComments.tsx"
-import Form from 'react-bootstrap/Form';
+//import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import { CardBody, CardFooter, CardText, CardTitle } from "react-bootstrap";
-import { sharedSelectedRecipe, getSharedSelectedRecipe, setSharedSelectedRecipe} from './shared-state.ts';        
+import { CardBody, CardFooter, CardTitle } from "react-bootstrap";
+import { setSharedSelectedRecipe} from './shared-state.ts';        
 export default function RecipeCard({recipe, onSelect, isSelected=false, setRecipeCardSelectedId}:
     {
         recipe: Recipe, 

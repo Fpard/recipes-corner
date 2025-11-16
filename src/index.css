@@ -92,3 +92,13 @@ border-radius: 4px;
 margin-bottom: 20px;
 
 }
+
+.div-container {
+ display: 'flex';
+ justify-Content: flex-start;
+ flex-Wrap: 'wrap';
+ overflow-x: auto;
+ width: 100%;
+}
+ 
+

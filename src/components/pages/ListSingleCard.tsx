@@ -11,7 +11,7 @@ import Row from 'react-bootstrap/Row';
 
 import {useParams } from "react-router-dom";
 import type {Recipe} from "../../types.ts"
-import Footer from "../Footer.tsx"
+
 
 export default function ListSingleCard() {
   // State to store the recipe data
@@ -52,7 +52,7 @@ export default function ListSingleCard() {
         setSharedSelectedRecipe(recipeData);
       } catch (err) {
         setError("Failed to load recipes");
-        console.error("Error saying about this recipe or fetching recipes:", err);
+        console.error("Error saying about this recipe or fetching recipes:", error);
       } finally {
         
       }
@@ -69,7 +69,7 @@ export default function ListSingleCard() {
                      <Card   style={{ width: '70rem' }}   >
                                    <h5> <Card.Header>{recipe?.name}</Card.Header></h5>
                                     
-                      <Card.Body style={{ height: '180px', overflowY: 'auto' }}>
+                      <Card.Body style={{ height: '200px', overflowY: 'auto' }}>
                       <CardTitle >
                          
                      </CardTitle>   
@@ -115,13 +115,7 @@ export default function ListSingleCard() {
 
                   </Row>
                  
-                <Row style={{ height: '190px' }}>
-                   <Card style={{ width: '70rem'}}>
-                    <Card.Body style={{ height: '140px' , overflowY: 'auto'  }}>
-                       <Footer /> 
-                    </Card.Body>  
-                   </Card> 
-                </Row>  
+                 
               </Container> 
              </>   
           );

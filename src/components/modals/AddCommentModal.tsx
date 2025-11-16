@@ -121,7 +121,7 @@ const AddCommentModal= ({
         
         // State for edit form data
          const data = await response.json();
-        
+        console.log("Loading: " + isLoading);
         setRecipeFetched(data) ;      
         setValue('authorName', data.authorName);
         setValue('name', data.name);
@@ -131,7 +131,7 @@ const AddCommentModal= ({
        
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load recipe");
-        console.error("Error fetching recipe:", err);
+        console.error("Error fetching recipe:", error);
       } finally {
         setIsLoading(false);
         
@@ -166,13 +166,16 @@ const AddCommentModal= ({
       
       const updatedRecipe = await response.json();
        setRecipeFetched(updatedRecipe);
+       setIsSaving(true);
+       console.log(" Saving is " + isSaving);
      handleClose();
       // Redirect to recipes page after successful comment addition
       navigate("/recipes");
     } catch (err) {
-      console.error("Error updating recipe:", err);
+      setError(err instanceof Error ? err.message : "Failed to update recipe");
+      console.error("Error updating recipe:", error);
     } finally {
-      //setIsSaving(false);
+      setIsSaving(false);
       
     }
   }

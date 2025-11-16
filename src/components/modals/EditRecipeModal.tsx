@@ -96,7 +96,7 @@ const EditRecipeModal= ({
     setRecipeFetched(null);
     recipe=undefined;
     setSharedSelectedRecipe(recipe)
-    //console.log("handle close in modal");
+    console.log("handle close in edit modal" + showEditModal);
      navigate("/recipes");
   };
   
@@ -128,7 +128,7 @@ const EditRecipeModal= ({
           
           // State for edit form data
           const data = await response.json();
-          
+          console.log("Loading: " + isLoading);
           setRecipeFetched(data) ;      
           //console.log("recipe fetched: ");
           //console.log({recipeFetched});
@@ -139,8 +139,9 @@ const EditRecipeModal= ({
           setValue('comments', data.comments);
           console.log("form data: "+ formData.getValues());
         } catch (err) {
+
           setError(err instanceof Error ? err.message : "Failed to load recipe");
-          console.error("Error fetching recipe:", err);
+          console.error("Error fetching recipe:", error);
         } finally {
           setIsLoading(false);
           
@@ -174,7 +175,9 @@ const EditRecipeModal= ({
       }
       
       const updatedRecipe = await response.json();
+      console.log("Saving: " + isSaving);
       console.log("just executed updateRecipe");
+      console.log({handleGetValues})
       setRecipeFetched(updatedRecipe);
      handleClose();
       // Redirect to recipes page after successful deletion

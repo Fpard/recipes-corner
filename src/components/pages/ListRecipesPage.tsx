@@ -6,7 +6,7 @@ import RecipeCard from "./RecipeCard";
 import { Card } from "react-bootstrap";
 import '../../index.css'
 import {setSharedSelectedRecipe,typeSelected} from './shared-state.ts';
-import Footer from "../Footer.tsx"
+
 //Import React Bootstrap components for styling
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -52,10 +52,10 @@ export default function ListRecipesPage() {
         setRecipes(recipesData);
        recipeTypeSelected = typeSelected=== "Pick a type"? recipes :
             recipes?.filter(recipe => (typeSelected===recipe.type))
-            console.log("recipeTypeSelected: " + {recipeTypeSelected})
+            console.log("recipeTypeSelected: " + {recipeTypeSelected} + " " + isLoading)
       } catch (err) {
         setError("Failed to load recipes");
-        console.error("Error fetching recipes:", err);
+        console.error("Error fetching recipes:", error);
       } finally {
         setIsLoading(false);
       }
@@ -79,7 +79,7 @@ export default function ListRecipesPage() {
                     <Row>
                      <Card   style={{ width: '70rem' }}   >
                                   <h5 className="bg-secondary text-white p-6">  <Card.Header>List of all recipes</Card.Header> </h5>
-                         <Card.Body style={{ height: '250px', overflowY: 'auto' }}>
+                         <Card.Body  style={{ height: '250px', overflowY: 'auto' }}>
 
                         <div className="overflow-x-auto w-100" style={{ display: 'flex', justifyContent: 'left' , flexWrap: 'wrap'}}>
                                                           
@@ -99,23 +99,18 @@ export default function ListRecipesPage() {
                     </Card>
                   </Row>  
 
-                  <Row>
+                  <Row >
                        <Card   style={{ width: '70rem' }}   >
                                   <h5 className="bg-info text-white p-6">  <Card.Header>Click on a card to see what people are saying about this recipe</Card.Header> </h5>
                          <Card.Body style={{ height: '250px', overflowY: 'auto' }}>
 
-                        <div className="h-55 overflow-y-auto w-100" style={{ display: 'flex', justifyContent: 'left', flexWrap: 'wrap' }}>
-                                                          
-                             {}
-                        </div>
+                        
                        </Card.Body>       
                     </Card>
 
                   </Row>
                 </Container> 
-                <div>
-                          <Footer/>
-                       </div>
+                
         </>   
     );
 

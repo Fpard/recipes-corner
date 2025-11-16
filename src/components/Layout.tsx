@@ -1,5 +1,6 @@
 import {Container} from "react-bootstrap";
 import Navbar from "./Navbar";
+import Footer from "./Footer.tsx";
 import { Outlet } from "react-router-dom";
 // Import React useState for managing component state
 import { useState } from "react";
@@ -49,6 +50,9 @@ function Layout() {
         onConfirm={() => setShowDeleteRecipeModal(false)}
         recipe={getSharedSelectedRecipe()!}
       />}
+
+      {/* Footer component that appears on all pages */}
+      <Footer/>
 
     </div>
   );

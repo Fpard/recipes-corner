@@ -13,7 +13,7 @@ import '../../index.css'
 //import LoadingButton from "../LoadingButton";
 import { setSharedSelectedRecipe,typeSelected } from './shared-state.ts';
 import type {Recipe} from "../../types.ts"
-import Footer from "../Footer.tsx"
+
 export default function ListSingleTypeRecipes() {
   // store all recipes
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -50,10 +50,11 @@ export default function ListSingleTypeRecipes() {
         setRecipes(recipesData);
         recipeTypeSelected = typeSelected=== "Pick a type"? recipesData :
         recipeTypeSelected = recipesData?.filter((recipe: Recipe) => (typeSelected===recipe.type))
+        console.log("recipeTypeSelected: " + {recipeTypeSelected} + " " + isLoading);
           
       } catch (err) {
-        setError("Failed to load recipes");
-        console.error("Error fetching recipes:", err);
+        setError("Failed to load recipes: " + err);
+        console.error("Error fetching recipes:", error);
       } finally {
         setIsLoading(false);
       }
@@ -104,9 +105,7 @@ export default function ListSingleTypeRecipes() {
 
                   </Row>
                 </Container>
-                <div>
-                  <Footer/>
-                </div>    
+                
              </>   
            );
 

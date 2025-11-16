@@ -27,9 +27,9 @@ const NewRecipeModal = ({ show, onHide }: NewRecipeModalProps) => {
   }});
     
   
-    const {register, control, handleSubmit, formState, getValues} = form;
+    const {register, control, handleSubmit} = form;
         
-    const {errors} = formState;
+    //const {errors} = formState;
     const [error, setError] = useState("");
     
     const {fields:ingredientFields, append: appendIngredients, remove: removeIngredients} = useFieldArray({
@@ -74,7 +74,7 @@ const NewRecipeModal = ({ show, onHide }: NewRecipeModalProps) => {
 
       // Refresh the page to show the new recipe
       window.location.reload();
-    } catch (error) {
+    } catch (err) {
       setError("Failed to create recipe. Please try again.");
       console.error('Submission failed:', error);
     } finally {

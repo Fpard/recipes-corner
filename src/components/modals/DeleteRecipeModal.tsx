@@ -6,7 +6,7 @@ import { type FC } from "react";
 import type { Recipe } from "../../types";
 //import { sharedSelectedRecipe, getSharedSelectedRecipe, setSharedSelectedRecipe} from '../pages/shared-state';
 // Import React Router components for navigation
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Define the props interface for this component
 interface DeleteRecipeModalProps {
