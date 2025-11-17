@@ -8,7 +8,7 @@ export default function Footer(){
                     <Col className="mx-2 ">
                        <Stack>
                            <p>
-                               Bootcamp: <cite title="Source Title">Front End Software Developer-- Final Project </cite>
+                               Bootcamp: <cite title="Source Title">Front End Software Developer-- Final Project by student: Francisco Pardieu </cite>
                             </p>
                             <p className="bg-primary text-white p-1">
                                 <em><small>
